@@ -13,6 +13,12 @@ Page({
     this.loadGroups();
   },
 
+  // handleWebviewPreload: "manual" in index.json — trigger the next tab's webview warm-up
+  // as soon as this page has rendered, instead of waiting on the default fixed 200ms delay.
+  onReady() {
+    if (typeof wx.preloadWebview === 'function') wx.preloadWebview();
+  },
+
   loadGroups() {
     const groups = wordStore.getGroupedVocab(this.data.mode).map((g, i) => ({ ...g, expanded: i === 0 }));
     this.setData({ groups });

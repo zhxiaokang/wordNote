@@ -22,6 +22,12 @@ Page({
     this.loadCalendar();
   },
 
+  // handleWebviewPreload: "manual" in index.json — trigger the next tab's webview warm-up
+  // as soon as this page has rendered, instead of waiting on the default fixed 200ms delay.
+  onReady() {
+    if (typeof wx.preloadWebview === 'function') wx.preloadWebview();
+  },
+
   loadCalendar() {
     const t = dateUtil.today();
     const [year, month] = t.split('-').map(Number);

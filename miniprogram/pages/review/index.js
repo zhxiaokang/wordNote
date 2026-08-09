@@ -21,6 +21,12 @@ Page({
     this.refreshView();
   },
 
+  // handleWebviewPreload: "manual" in index.json — trigger the next tab's webview warm-up
+  // as soon as this page has rendered, instead of waiting on the default fixed 200ms delay.
+  onReady() {
+    if (typeof wx.preloadWebview === 'function') wx.preloadWebview();
+  },
+
   refreshView() {
     const session = this.session;
     const progressPercent = session.dueCount ? Math.round((session.doneCount / session.dueCount) * 100) : 0;

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390px">
+<title>4 我的-授权弹窗</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  width:390px; background:#F2F6FB;
+  font-family:'PingFang SC','Noto Sans SC','Microsoft YaHei',
+              'Source Han Sans CN',sans-serif;
+}
+.screen {
+  width:390px; min-height:844px; position:relative;
+  padding-bottom:88px; background:#F2F6FB;
+}
+.status {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:14px 22px 4px; font-size:13px; font-weight:700; color:#1C1C1E;
+}
+.page-title { padding:4px 24px 0; display:flex; align-items:center; justify-content:space-between; }
+.page-title h1 { font-size:24px; font-weight:700; color:#1C1C1E; line-height:1.2; }
+.nav {
+  position:fixed; bottom:0; left:0; width:390px; height:88px;
+  background:#fff; border-top:0.5px solid #C7C7CC;
+  display:flex; align-items:center; justify-content:space-around;
+  z-index:100;
+}
+.nav-item {
+  display:flex; flex-direction:column; align-items:center;
+  gap:4px; color:#8E8E93; font-size:12px; cursor:pointer; width:80px;
+}
+.nav-item.active { color:#3A9FD5; }
+.nav-item .icon-wrap {
+  background:transparent; border-radius:14px;
+  padding:4px 18px; font-size:18px; line-height:1.4;
+}
+.nav-item.active .icon-wrap { background:#E8F4FC; }
+.card {
+  background:#fff; border-radius:18px;
+  box-shadow:0 2px 14px rgba(0,0,0,.08);
+  margin:14px 24px 0; padding:18px 18px;
+}
+.card-title {
+  font-size:15px; font-weight:700; color:#1C1C1E; margin-bottom:12px;
+}
+.btn {
+  border:none; border-radius:14px; font-size:15px;
+  font-family:inherit; cursor:pointer; font-weight:600;
+  padding:11px 22px;
+}
+.btn-blue  { background:#3A9FD5; color:#fff; }
+.btn-ghost { background:#F2F2F7; color:#3A9FD5; }
+.btn-red   { background:#FFF0F0; color:#FF3B30; }
+</style>
+</head>
+<body>
+<div class="screen">
+<div class="status"><span>9:41</span><span>● ● ●</span></div>
+
+<div class="page-title"><h1>我的</h1></div>
+
+<div class="card" style="display:flex;align-items:center;gap:14px;padding:20px 18px">
+  <div style="width:54px;height:54px;border-radius:50%;background:#E8F4FC;
+              display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0">👤</div>
+  <div style="flex:1">
+    <div style="font-size:15px;color:#8E8E93;margin-bottom:10px">登录后可同步数据到云端</div>
+    <button class="btn btn-blue" style="width:100%">登录</button>
+  </div>
+</div>
+
+<!-- modal overlay -->
+<div style="position:fixed;top:0;left:0;width:390px;height:100%;
+            background:rgba(0,0,0,0.45);z-index:200;
+            display:flex;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:20px;width:300px;padding:24px 20px;text-align:center">
+    <div style="font-size:17px;font-weight:700;color:#1C1C1E;margin-bottom:10px">授权登录</div>
+    <div style="font-size:13px;color:#8E8E93;line-height:1.6;margin-bottom:20px">
+      「记单词」申请获取你的微信昵称和头像，用于账号登录与数据同步。
+    </div>
+    <div style="display:flex;gap:10px">
+      <button class="btn btn-ghost" style="flex:1;padding:12px 0">取消</button>
+      <button class="btn btn-blue"  style="flex:1;padding:12px 0">允许</button>
+    </div>
+  </div>
+</div>
+
+<div class="nav">
+  <div class="nav-item"><div class="icon-wrap"><span>↺</span></div><span>复习</span></div>
+  <div class="nav-item"><div class="icon-wrap"><span>＋</span></div><span>新词</span></div>
+  <div class="nav-item"><div class="icon-wrap"><span>≡</span></div><span>词汇</span></div>
+  <div class="nav-item active"><div class="icon-wrap"><span>👤</span></div><span>我的</span></div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+.form {
+  padding: 32rpx 48rpx 0;
+}
+.word-input {
+  margin-bottom: 28rpx;
+  font-weight: 700;
+  font-size: 34rpx;
+}
+
+.meaning-row {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 20rpx;
+  position: relative;
+}
+.pos-select {
+  flex: 0 0 218rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pos-placeholder {
+  font-size: 26rpx;
+  color: #C7C7CC;
+}
+.pos-value {
+  color: #3A9FD5;
+  font-weight: 700;
+}
+.caret {
+  font-size: 22rpx;
+  color: #3A9FD5;
+}
+.def-input {
+  flex: 1;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100rpx;
+  left: 0;
+  width: 218rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  box-shadow: 0 8rpx 48rpx rgba(0, 0, 0, 0.13);
+  z-index: 10;
+  overflow: hidden;
+}
+.dropdown-option {
+  padding: 18rpx 0;
+  text-align: center;
+  font-size: 28rpx;
+  color: #3C3C43;
+  border-bottom: 1rpx solid #E5E5EA;
+}
+.dropdown-option:last-child {
+  border-bottom: none;
+}
+.dropdown-option--active {
+  background: #E8F4FC;
+  color: #3A9FD5;
+  font-weight: 700;
+}
+
+.add-pos {
+  display: inline-flex;
+  align-items: center;
+  background: #E8F4FC;
+  color: #3A9FD5;
+  font-size: 26rpx;
+  border-radius: 20rpx;
+  padding: 14rpx 36rpx;
+  margin-bottom: 28rpx;
+}
+
+.notes-input {
+  height: 200rpx;
+}
+
+.save-btn {
+  width: 100%;
+  margin-top: 36rpx;
+  padding: 32rpx 0;
+}

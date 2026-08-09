@@ -1,14 +1,30 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/example/index"
+    "pages/review/index",
+    "pages/newword/index",
+    "pages/vocab/index",
+    "pages/mine/index",
+    "pages/vocab-detail/index",
+    "pages/feedback/index"
   ],
   "window": {
-    "backgroundColor": "#F6F6F6",
+    "backgroundColor": "#F2F6FB",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarBackgroundColor": "#F2F6FB",
+    "navigationBarTitleText": "记单词",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#8E8E93",
+    "selectedColor": "#3A9FD5",
+    "backgroundColor": "#ffffff",
+    "list": [
+      { "pagePath": "pages/review/index", "text": "复习" },
+      { "pagePath": "pages/newword/index", "text": "新词" },
+      { "pagePath": "pages/vocab/index", "text": "词汇" },
+      { "pagePath": "pages/mine/index", "text": "我的" }
+    ]
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2",

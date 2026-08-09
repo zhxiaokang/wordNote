@@ -1,0 +1,76 @@
+<view wx:if="{{ready}}">
+  <view class="page-title">
+    <text class="title">复习</text>
+    <text class="subtitle" wx:if="{{dueCount > 0}}">今日 {{dueCount}} 个单词</text>
+    <text class="subtitle" wx:else>今日复习</text>
+  </view>
+
+  <block wx:if="{{phase === 'empty'}}">
+    <view class="card empty-card">
+      <view class="empty-emoji">🎉</view>
+      <view class="empty-title">今天没有需要复习的单词</view>
+      <view class="empty-sub">去「新词」记录一个吧，或者明天再来看看</view>
+    </view>
+  </block>
+
+  <block wx:if="{{phase === 'word' || phase === 'feedback'}}">
+    <view class="prog-wrap">
+      <view class="prog-label">{{doneCount}} / {{dueCount}}</view>
+      <view class="prog-bg"><view class="prog-fill" style="width: {{progressPercent}}%"></view></view>
+    </view>
+
+    <view wx:if="{{phase === 'word'}}" class="card word-card">
+      <view class="word-text">{{currentWord.word}}</view>
+      <view class="word-hint">选择你是否记得这个单词</view>
+    </view>
+    <view wx:if="{{phase === 'word'}}" class="btn-row">
+      <button class="btn btn-red-lt" bindtap="onTapDontKnow">不记得</button>
+      <button class="btn btn-blue" bindtap="onTapKnow">记得</button>
+    </view>
+
+    <view wx:if="{{phase === 'feedback'}}" class="card feedback-card">
+      <view class="word-text word-text--sm">{{currentWord.word}}</view>
+      <view class="divider"></view>
+      <view class="meaning-row" wx:for="{{currentWord.meanings}}" wx:key="pos">
+        <text class="pos">{{item.pos}}</text>
+        <text class="def">{{item.def}}</text>
+      </view>
+      <view class="notes-row" wx:if="{{currentWord.notes}}">
+        <text class="notes-label">eg.</text>
+        <text class="notes-text">{{currentWord.notes}}</text>
+      </view>
+      <view class="badge badge--{{badgeType}}">
+        刚才选了：{{badgeType === 'know' ? '记得' : (badgeType === 'wrong' ? '记错了' : '不记得')}}
+      </view>
+    </view>
+    <view wx:if="{{phase === 'feedback' && showNext}}" class="btn-row">
+      <button class="btn btn-blue btn-wide" bindtap="onTapNext">下一个 →</button>
+    </view>
+    <view wx:if="{{phase === 'feedback' && !showNext}}" class="btn-row">
+      <button class="btn btn-red-lt" bindtap="onTapWrong">记错了</button>
+      <button class="btn btn-green" bindtap="onTapCorrect">记对了 ✓</button>
+    </view>
+  </block>
+
+  <block wx:if="{{phase === 'done'}}">
+    <view class="card done-card">
+      <view class="done-emoji-wrap"><text class="done-emoji">🎉</text></view>
+      <view class="done-title">今日任务完成！</view>
+      <view class="done-sub">共复习了 {{stats.total}} 个单词</view>
+      <view class="done-stats">
+        <view class="stat">
+          <view class="stat-num">{{stats.total}}</view>
+          <view class="stat-label">复习总数</view>
+        </view>
+        <view class="stat">
+          <view class="stat-num">{{stats.mastered}}</view>
+          <view class="stat-label">已掌握</view>
+        </view>
+        <view class="stat">
+          <view class="stat-num">{{stats.needsStrength}}</view>
+          <view class="stat-label">需加强</view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

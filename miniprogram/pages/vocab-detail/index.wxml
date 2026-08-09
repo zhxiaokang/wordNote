@@ -1,0 +1,30 @@
+<view wx:if="{{word}}">
+  <view class="card word-card">
+    <view class="word-text">{{word.word}}</view>
+    <view class="added-badge">添加于 {{createdDateSlash}}</view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">词义</view>
+    <view class="card meaning-card">
+      <view class="meaning-row" wx:for="{{word.meanings}}" wx:key="pos">
+        <text class="pos">{{item.pos}}</text>
+        <text class="def">{{item.def}}</text>
+      </view>
+    </view>
+
+    <view class="section-title">词组 &amp; 例句</view>
+    <view class="card notes-card">
+      <text wx:if="{{word.notes}}">{{word.notes}}</text>
+      <text wx:else class="notes-empty">未记录</text>
+    </view>
+
+    <view class="section-title">复习记录</view>
+    <view class="card history-card">
+      <view class="history-row" wx:for="{{history}}" wx:key="date">
+        <text class="history-date">{{item.date}}</text>
+        <text class="history-action {{item.cls}}">{{item.label}}</text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,13 @@
+<view class="nav">
+  <view
+    class="nav-item {{active === index ? 'active' : ''}}"
+    wx:for="{{list}}"
+    wx:key="pagePath"
+    wx:for-index="index"
+    data-index="{{index}}"
+    bindtap="onTap"
+  >
+    <view class="icon-wrap"><text>{{item.icon}}</text></view>
+    <text>{{item.text}}</text>
+  </view>
+</view>

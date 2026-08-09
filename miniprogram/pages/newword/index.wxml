@@ -1,0 +1,47 @@
+<view class="page-title">
+  <text class="title">新词</text>
+  <text class="subtitle">记录一个新单词</text>
+</view>
+
+<view class="form">
+  <text class="field-label">单词</text>
+  <input class="field field-filled word-input" placeholder="e.g. ephemeral" value="{{word}}" bindinput="onWordInput" />
+
+  <text class="field-label">词性 &amp; 词义</text>
+  <view class="meaning-row" wx:for="{{meaningRows}}" wx:key="index" wx:for-index="index">
+    <view class="pos-select field field-filled" data-index="{{index}}" bindtap="onToggleDropdown">
+      <text class="{{item.pos ? 'pos-value' : 'pos-placeholder'}}">{{item.pos || '选择词性...'}}</text>
+      <text class="caret">▾</text>
+    </view>
+    <input
+      class="field def-input {{item.pos ? 'field-filled' : ''}}"
+      placeholder="填写该词性的词义"
+      value="{{item.def}}"
+      data-index="{{index}}"
+      bindinput="onDefInput"
+    />
+    <view class="dropdown" wx:if="{{openDropdownIndex === index}}">
+      <view
+        class="dropdown-option {{item.pos === opt ? 'dropdown-option--active' : ''}}"
+        wx:for="{{posOptions}}"
+        wx:for-item="opt"
+        wx:key="*this"
+        data-index="{{index}}"
+        data-pos="{{opt}}"
+        bindtap="onSelectPos"
+      >{{opt}}</view>
+    </view>
+  </view>
+
+  <view class="add-pos" bindtap="onAddMeaning">＋ 添加词性</view>
+
+  <text class="field-label">词组 &amp; 例句</text>
+  <textarea
+    class="field notes-input {{notes ? 'field-filled' : ''}}"
+    placeholder="记录词组或例句（选填）"
+    value="{{notes}}"
+    bindinput="onNotesInput"
+  />
+
+  <button class="btn {{canSave ? 'btn-blue' : 'btn-gray'}} save-btn" bindtap="onSave">保存单词</button>
+</view>

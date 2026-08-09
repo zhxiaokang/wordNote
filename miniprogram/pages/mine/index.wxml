@@ -1,0 +1,61 @@
+<view class="page-title">
+  <text class="title">我的</text>
+</view>
+
+<view class="card profile-card">
+  <block wx:if="{{auth.loggedIn}}">
+    <image wx:if="{{auth.avatarUrl}}" class="avatar" src="{{auth.avatarUrl}}" />
+    <view wx:else class="avatar avatar-placeholder">😊</view>
+    <view>
+      <view class="nickname">{{auth.nickName || '微信用户'}}</view>
+      <view class="login-sub">已登录 · 数据已同步</view>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="avatar avatar-placeholder">👤</view>
+    <view class="login-body">
+      <view class="login-sub">登录后可同步数据到云端</view>
+      <button class="btn btn-blue login-btn" bindtap="onTapLogin">登录</button>
+    </view>
+  </block>
+</view>
+
+<view class="card checkin-card">
+  <view class="card-title">📅 学习打卡</view>
+  <view class="month-label">{{monthLabel}}</view>
+  <view class="week-labels">
+    <view class="week-cell" wx:for="{{weekdayLabels}}" wx:key="*this">{{item}}</view>
+  </view>
+  <view class="week-row" wx:for="{{weeks}}" wx:key="index" wx:for-item="week" wx:for-index="index">
+    <view class="day-cell" wx:for="{{week}}" wx:key="dayIndex" wx:for-item="cell" wx:for-index="dayIndex">
+      <block wx:if="{{cell}}">
+        <view class="day-num {{cell.isToday ? 'day-num--today' : ''}}">{{cell.day}}</view>
+        <view class="day-mark">{{cell.pending ? '—' : cell.emoji}}</view>
+      </block>
+    </view>
+  </view>
+  <view class="legend">
+    <text>😊 全部完成</text>
+    <text>😐 部分完成</text>
+    <text>😢 未复习</text>
+  </view>
+</view>
+
+<view class="card feedback-card" bindtap="onTapFeedback">
+  <view class="feedback-hdr">
+    <view class="card-title" style="margin-bottom:0">💬 用户反馈</view>
+    <text wx:if="{{auth.loggedIn}}" class="chevron">›</text>
+  </view>
+  <view class="feedback-sub">{{auth.loggedIn ? '点击进入，提交建议或查看开发者回复' : '登录后可提交反馈'}}</view>
+</view>
+
+<view class="modal-mask" wx:if="{{showLoginModal}}">
+  <view class="modal-box">
+    <view class="modal-title">授权登录</view>
+    <view class="modal-desc">「记单词」申请获取你的微信昵称和头像，用于账号登录与数据同步。</view>
+    <view class="modal-actions">
+      <button class="btn btn-ghost" bindtap="onCancelLogin">取消</button>
+      <button class="btn btn-blue" bindtap="onConfirmLogin">允许</button>
+    </view>
+  </view>
+</view>

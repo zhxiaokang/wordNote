@@ -1,0 +1,26 @@
+<view class="thread" wx:for="{{list}}" wx:key="id">
+  <view class="card thread-card">
+    <view class="thread-label">我的留言</view>
+    <view class="bubble bubble-mine">{{item.message}}</view>
+    <view class="ts">{{item.createdAtLabel}}</view>
+
+    <block wx:if="{{item.reply}}">
+      <view class="thread-label" style="margin-top:24rpx">开发者回复</view>
+      <view class="bubble bubble-reply">{{item.reply}}</view>
+      <view class="ts">{{item.repliedAtLabel}}</view>
+    </block>
+  </view>
+</view>
+
+<view wx:if="{{!loading && list.length === 0}}" class="empty-tip">还没有反馈记录</view>
+
+<view class="card compose-card">
+  <view class="thread-label">新建留言</view>
+  <textarea
+    class="compose-input"
+    placeholder="请输入你的建议或问题…"
+    value="{{draft}}"
+    bindinput="onDraftInput"
+  />
+  <button class="btn btn-blue submit-btn" bindtap="onSubmit">提交</button>
+</view>

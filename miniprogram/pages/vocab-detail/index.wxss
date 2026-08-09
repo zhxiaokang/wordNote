@@ -1,0 +1,90 @@
+.word-card {
+  margin: 24rpx 48rpx 0;
+  padding: 64rpx 48rpx;
+  text-align: center;
+}
+.word-text {
+  font-size: 76rpx;
+  font-weight: 900;
+  color: #1C1C1E;
+  font-family: Georgia, serif;
+}
+.added-badge {
+  display: inline-block;
+  margin-top: 24rpx;
+  background: #E8F4FC;
+  color: #3A9FD5;
+  font-size: 22rpx;
+  border-radius: 40rpx;
+  padding: 6rpx 28rpx;
+}
+
+.section {
+  padding: 28rpx 48rpx 0;
+}
+.section-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #1C1C1E;
+  margin: 28rpx 0 16rpx;
+}
+.section-title:first-child {
+  margin-top: 0;
+}
+
+.meaning-card, .notes-card {
+  padding: 28rpx 36rpx;
+}
+.meaning-row {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+}
+.meaning-row + .meaning-row {
+  margin-top: 16rpx;
+}
+.meaning-row .pos {
+  color: #3A9FD5;
+  font-weight: 700;
+  font-size: 28rpx;
+  flex-shrink: 0;
+}
+.meaning-row .def {
+  font-size: 28rpx;
+  color: #1C1C1E;
+}
+.notes-card {
+  font-size: 26rpx;
+  line-height: 1.9;
+  color: #3C3C43;
+  white-space: pre-wrap;
+}
+.notes-empty {
+  color: #C7C7CC;
+}
+
+.history-card {
+  padding: 28rpx 36rpx;
+}
+.history-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 26rpx;
+  padding: 8rpx 0;
+  border-bottom: 1rpx solid #F2F2F7;
+}
+.history-row:last-child {
+  border-bottom: none;
+}
+.history-date {
+  color: #8E8E93;
+}
+.action-added {
+  color: #3A9FD5;
+}
+.action-correct {
+  color: #34C759;
+}
+.action-incorrect {
+  color: #FF3B30;
+}

@@ -1,0 +1,38 @@
+<view class="page-title">
+  <text class="title">词汇</text>
+  <text class="subtitle">我的单词本</text>
+</view>
+
+<view class="tabs">
+  <view class="tab {{mode === 'week' ? 'active' : ''}}" data-mode="week" bindtap="onSwitchMode">周</view>
+  <view class="tab {{mode === 'month' ? 'active' : ''}}" data-mode="month" bindtap="onSwitchMode">月</view>
+  <view class="tab {{mode === 'year' ? 'active' : ''}}" data-mode="year" bindtap="onSwitchMode">年</view>
+</view>
+
+<view wx:if="{{groups.length === 0}}" class="empty-tip">还没有记录任何单词</view>
+
+<block wx:for="{{groups}}" wx:key="key" wx:for-item="group" wx:for-index="gIndex">
+  <view class="group-hdr" data-index="{{gIndex}}" bindtap="onToggleGroup">
+    <view class="{{group.expanded ? 'tri-down' : 'tri-right'}}"></view>
+    <text class="label">{{group.label}}</text>
+    <text class="count">{{group.words.length}}</text>
+  </view>
+  <block wx:if="{{group.expanded}}">
+    <view
+      class="word-row"
+      wx:for="{{group.words}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="onTapWord"
+    >
+      <view>
+        <view class="word">{{item.word}}</view>
+        <view class="meaning">
+          <text class="pos">{{item.meanings[0].pos}}</text>
+          <text class="def">{{item.meanings[0].def}}</text>
+        </view>
+      </view>
+      <text class="chevron">›</text>
+    </view>
+  </block>
+</block>

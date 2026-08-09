@@ -1,0 +1,171 @@
+.prog-wrap {
+  padding: 0 48rpx;
+  margin-top: 20rpx;
+}
+.prog-label {
+  text-align: right;
+  font-size: 22rpx;
+  color: #8E8E93;
+  margin-bottom: 4rpx;
+}
+.prog-bg {
+  background: #C7C7CC;
+  border-radius: 6rpx;
+  height: 10rpx;
+}
+.prog-fill {
+  background: #3A9FD5;
+  border-radius: 6rpx;
+  height: 10rpx;
+}
+
+.word-card {
+  margin: 28rpx 48rpx 0;
+  padding: 120rpx 48rpx 104rpx;
+  text-align: center;
+}
+.word-text {
+  font-size: 88rpx;
+  font-weight: 900;
+  color: #1C1C1E;
+  font-family: Georgia, serif;
+}
+.word-text--sm {
+  font-size: 76rpx;
+  text-align: center;
+}
+.word-hint {
+  font-size: 26rpx;
+  color: #8E8E93;
+  margin-top: 144rpx;
+}
+
+.btn-row {
+  display: flex;
+  gap: 28rpx;
+  margin: 40rpx 48rpx 0;
+}
+.btn-row .btn {
+  flex: 1;
+  padding: 36rpx 0;
+  text-align: center;
+}
+.btn-wide {
+  width: 100%;
+}
+
+.feedback-card {
+  margin: 28rpx 48rpx 0;
+  padding: 56rpx 48rpx 48rpx;
+}
+.divider {
+  border-top: 1rpx solid #C7C7CC;
+  margin: 40rpx 0 32rpx;
+}
+.meaning-row {
+  display: flex;
+  align-items: baseline;
+  gap: 20rpx;
+  margin-bottom: 20rpx;
+}
+.meaning-row .pos {
+  color: #3A9FD5;
+  font-size: 26rpx;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.meaning-row .def {
+  font-size: 30rpx;
+  color: #1C1C1E;
+}
+.notes-row {
+  display: flex;
+  gap: 16rpx;
+  font-size: 26rpx;
+  color: #3C3C43;
+  margin-bottom: 28rpx;
+}
+.notes-label {
+  color: #8E8E93;
+  flex-shrink: 0;
+}
+.badge {
+  display: inline-block;
+  font-size: 24rpx;
+  border-radius: 40rpx;
+  padding: 8rpx 28rpx;
+}
+.badge--know {
+  background: #F0FFF4;
+  color: #34C759;
+}
+.badge--dontknow, .badge--wrong {
+  background: #FFF0F0;
+  color: #FF3B30;
+}
+
+.empty-card, .done-card {
+  margin: 80rpx 72rpx 0;
+  padding: 72rpx 48rpx 56rpx;
+  text-align: center;
+}
+.empty-emoji {
+  font-size: 88rpx;
+  margin-bottom: 24rpx;
+}
+.empty-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #1C1C1E;
+  margin-bottom: 12rpx;
+}
+.empty-sub {
+  font-size: 24rpx;
+  color: #8E8E93;
+}
+
+.done-emoji-wrap {
+  width: 176rpx;
+  height: 176rpx;
+  border-radius: 50%;
+  background: #E8F4FC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 40rpx;
+}
+.done-emoji {
+  font-size: 88rpx;
+}
+.done-title {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #1C1C1E;
+  margin-bottom: 16rpx;
+}
+.done-sub {
+  font-size: 28rpx;
+  color: #8E8E93;
+  margin-bottom: 48rpx;
+}
+.done-stats {
+  display: flex;
+  justify-content: space-around;
+}
+.stat {
+  background: #E8F4FC;
+  border-radius: 24rpx;
+  padding: 24rpx 0;
+  width: 164rpx;
+  text-align: center;
+}
+.stat-num {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #3A9FD5;
+}
+.stat-label {
+  font-size: 22rpx;
+  color: #8E8E93;
+  margin-top: 8rpx;
+}

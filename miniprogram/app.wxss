@@ -70,6 +70,14 @@ page {
   background: #fff;
   box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.07);
 }
+/* <input> is a native form control on WeChat's runtime — its intrinsic box
+   ignores vertical padding and clips the text/placeholder against a fixed
+   line box. Give it an explicit height and center via line-height instead. */
+input.field {
+  height: 88rpx;
+  line-height: 88rpx;
+  padding: 0 28rpx;
+}
 .field-label {
   font-size: 24rpx;
   color: #8E8E93;

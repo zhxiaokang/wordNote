@@ -20,7 +20,7 @@ Page({
   },
 
   loadGroups() {
-    const groups = wordStore.getGroupedVocab(this.data.mode).map((g, i) => ({ ...g, expanded: i === 0 }));
+    const groups = wordStore.getGroupedVocab(this.data.mode).map((g, i) => Object.assign({}, g, { expanded: i === 0 }));
     this.setData({ groups });
   },
 

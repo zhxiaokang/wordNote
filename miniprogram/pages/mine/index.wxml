@@ -2,15 +2,6 @@
   <text class="title">我的</text>
 </view>
 
-<view class="card backup-card">
-  <view class="card-title">💾 数据备份</view>
-  <view class="backup-sub">单词和复习记录只保存在本机，换机或清理微信缓存前建议导出备份</view>
-  <view class="backup-actions">
-    <button class="btn btn-ghost backup-btn" bindtap="onTapExport">导出数据</button>
-    <button class="btn btn-blue backup-btn" bindtap="onTapImport">导入数据</button>
-  </view>
-</view>
-
 <view class="card checkin-card">
   <view class="card-title">📅 学习打卡</view>
   <view class="month-label">{{monthLabel}}</view>
@@ -29,6 +20,15 @@
     <text>😊 全部完成</text>
     <text>😐 部分完成</text>
     <text>😢 未复习</text>
+  </view>
+</view>
+
+<view class="card backup-card">
+  <view class="card-title">💾 数据备份</view>
+  <view class="backup-sub">单词和复习记录只保存在本机，换机或清理微信缓存前建议导出备份</view>
+  <view class="backup-actions">
+    <button class="btn btn-ghost backup-btn" bindtap="onTapExport">导出数据</button>
+    <button class="btn btn-blue backup-btn" bindtap="onTapImport">导入数据</button>
   </view>
 </view>
 

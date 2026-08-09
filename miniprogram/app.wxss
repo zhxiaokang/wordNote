@@ -60,6 +60,7 @@ page {
   background: #F2F2F7;
   border-radius: 24rpx;
   font-size: 30rpx;
+  line-height: 1.5;
   color: #1C1C1E;
   padding: 24rpx 28rpx;
   width: 100%;

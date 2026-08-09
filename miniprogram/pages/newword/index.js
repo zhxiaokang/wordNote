@@ -14,6 +14,9 @@ Page({
     posOptions: POS_OPTIONS,
     openDropdownIndex: -1,
     canSave: false,
+    wordFocused: false,
+    focusedDefIndex: -1,
+    notesFocused: false,
   },
 
   onShow() {
@@ -24,7 +27,7 @@ Page({
 
   updateCanSave() {
     const hasWord = this.data.word.trim().length > 0;
-    const hasMeaning = this.data.meaningRows.some((r) => r.pos && r.def.trim());
+    const hasMeaning = this.data.meaningRows.some((r) => r.def.trim());
     this.setData({ canSave: hasWord && hasMeaning });
   },
 
@@ -32,8 +35,24 @@ Page({
     this.setData({ word: e.detail.value }, () => this.updateCanSave());
   },
 
+  onWordFocus() {
+    this.setData({ wordFocused: true });
+  },
+
+  onWordBlur() {
+    this.setData({ wordFocused: false });
+  },
+
   onNotesInput(e) {
     this.setData({ notes: e.detail.value });
+  },
+
+  onNotesFocus() {
+    this.setData({ notesFocused: true });
+  },
+
+  onNotesBlur() {
+    this.setData({ notesFocused: false });
   },
 
   onDefInput(e) {
@@ -41,6 +60,15 @@ Page({
     const meaningRows = this.data.meaningRows;
     meaningRows[index].def = e.detail.value;
     this.setData({ meaningRows }, () => this.updateCanSave());
+  },
+
+  onDefFocus(e) {
+    const { index } = e.currentTarget.dataset;
+    this.setData({ focusedDefIndex: index });
+  },
+
+  onDefBlur() {
+    this.setData({ focusedDefIndex: -1 });
   },
 
   onToggleDropdown(e) {
@@ -62,7 +90,7 @@ Page({
 
   onSave() {
     if (!this.data.canSave) return;
-    const meanings = this.data.meaningRows.filter((r) => r.pos && r.def.trim());
+    const meanings = this.data.meaningRows.filter((r) => r.def.trim());
     wordStore.addWord({ word: this.data.word, meanings, notes: this.data.notes.trim() });
     wx.showToast({ title: '已保存', icon: 'success' });
     this.setData({

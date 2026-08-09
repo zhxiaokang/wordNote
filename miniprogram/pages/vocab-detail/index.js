@@ -45,6 +45,7 @@ Page({
     wordFocused: false,
     focusedDefIndex: -1,
     notesFocused: false,
+    showDeleteModal: false,
   },
 
   onLoad(options) {
@@ -169,5 +170,19 @@ Page({
     this.setData({ editing: false, openDropdownIndex: -1 });
     this.loadWord();
     wx.showToast({ title: '已保存', icon: 'success' });
+  },
+
+  onTapDelete() {
+    this.setData({ showDeleteModal: true });
+  },
+
+  onCancelDelete() {
+    this.setData({ showDeleteModal: false });
+  },
+
+  onConfirmDelete() {
+    wordStore.deleteWord(this.wordId);
+    wx.showToast({ title: '已删除', icon: 'success' });
+    wx.navigateBack();
   },
 });

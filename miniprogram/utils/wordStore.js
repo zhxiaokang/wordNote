@@ -81,6 +81,28 @@ function updateWord({ id, word, meanings, notes }) {
   return existing;
 }
 
+// Also strips the word out of today's in-progress session (if any) so a word deleted while
+// queued for review today doesn't leave a dangling id behind — getCurrentSessionWord would
+// otherwise resolve it to null mid-session.
+function deleteWord(id) {
+  const words = readWords().filter((w) => w.id !== id);
+  writeWords(words);
+
+  const t = today();
+  const map = readDailyStatus();
+  const entry = map[t];
+  if (entry && entry.order && entry.order.indexOf(id) !== -1) {
+    entry.order = entry.order.filter((wid) => wid !== id);
+    entry.queue = entry.queue.filter((wid) => wid !== id);
+    entry.mistakes = entry.mistakes.filter((wid) => wid !== id);
+    entry.dueCount = entry.order.length;
+    if (entry.queue.length === 0) entry.finished = true;
+    entry.updatedAt = Date.now();
+    map[t] = entry;
+    writeDailyStatus(map);
+  }
+}
+
 function getDueWords(dateStr) {
   return readWords()
     .filter((w) => w.nextReviewDate <= dateStr)
@@ -278,6 +300,7 @@ module.exports = {
   saveWord,
   addWord,
   updateWord,
+  deleteWord,
   getDueWords,
   backfillGapDays,
   getOrCreateTodaySession,

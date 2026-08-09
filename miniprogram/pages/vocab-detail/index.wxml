@@ -19,7 +19,10 @@
   </view>
 
   <view class="edit-toolbar">
-    <view wx:if="{{!editing}}" class="btn-pill btn-pill--blue" bindtap="onEdit">✎ 编辑</view>
+    <block wx:if="{{!editing}}">
+      <view class="btn-pill btn-pill--red" bindtap="onTapDelete">🗑 删除</view>
+      <view class="btn-pill btn-pill--blue" bindtap="onEdit">✎ 编辑</view>
+    </block>
     <block wx:else>
       <view class="btn-pill btn-pill--gray" bindtap="onCancelEdit">取消</view>
       <view class="btn-pill {{canSave ? 'btn-pill--blue' : 'btn-pill--disabled'}}" bindtap="onSave">保存</view>
@@ -86,6 +89,17 @@
       <view class="history-row" wx:for="{{history}}" wx:key="date">
         <text class="history-date">{{item.date}}</text>
         <text class="history-action {{item.cls}}">{{item.label}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="modal-mask" wx:if="{{showDeleteModal}}">
+    <view class="modal-box">
+      <view class="modal-title">删除单词</view>
+      <view class="modal-desc">确定要删除「{{word.word}}」吗？删除后这个单词的所有记录都无法恢复。</view>
+      <view class="modal-actions">
+        <button class="btn-modal btn-modal--gray" bindtap="onCancelDelete">取消</button>
+        <button class="btn-modal btn-modal--red" bindtap="onConfirmDelete">删除</button>
       </view>
     </view>
   </view>

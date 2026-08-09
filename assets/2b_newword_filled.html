@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390px">
+<title>2b 新词-已填写</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  width:390px; background:#F2F6FB;
+  font-family:'PingFang SC','Noto Sans SC','Microsoft YaHei',
+              'Source Han Sans CN',sans-serif;
+}
+.screen {
+  width:390px; min-height:844px; position:relative;
+  padding-bottom:88px; background:#F2F6FB;
+}
+.status {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:14px 22px 4px; font-size:13px; font-weight:700; color:#1C1C1E;
+}
+.page-title { padding:4px 24px 0; }
+.page-title h1 { font-size:24px; font-weight:700; color:#1C1C1E; line-height:1.2; }
+.page-title p  { font-size:13px; color:#8E8E93; margin-top:2px; }
+.card {
+  background:#fff; border-radius:18px;
+  box-shadow:0 2px 14px rgba(0,0,0,.08);
+}
+.nav {
+  position:fixed; bottom:0; left:0; width:390px; height:88px;
+  background:#fff; border-top:0.5px solid #C7C7CC;
+  display:flex; align-items:center; justify-content:space-around;
+  z-index:100;
+}
+.nav-item {
+  display:flex; flex-direction:column; align-items:center;
+  gap:4px; color:#8E8E93; font-size:12px; cursor:pointer; width:80px;
+}
+.nav-item.active { color:#3A9FD5; }
+.nav-item .icon-wrap {
+  background:transparent; border-radius:14px;
+  padding:4px 18px; font-size:18px; line-height:1.4;
+}
+.nav-item.active .icon-wrap { background:#E8F4FC; }
+.nav-item .icon-wrap span { font-size:18px; }
+.prog-wrap { padding:0 24px; margin-top:4px; }
+.prog-label { text-align:right; font-size:11px; color:#8E8E93; margin-bottom:2px; }
+.prog-bg { background:#C7C7CC; border-radius:3px; height:5px; }
+.prog-fill { background:#3A9FD5; border-radius:3px; height:5px; }
+.btn {
+  border:none; border-radius:14px; font-size:17px;
+  font-family:inherit; cursor:pointer; font-weight:500;
+}
+.btn-blue  { background:#3A9FD5; color:#fff; }
+.btn-gray  { background:#C7C7CC; color:#fff; }
+.btn-red-lt{ background:#FFF0F0; color:#FF3B30; }
+.btn-green { background:#34C759; color:#fff; }
+.field {
+  background:#F2F2F7; border-radius:12px; border:none;
+  font-size:15px; font-family:inherit; color:#1C1C1E;
+  padding:12px 14px; width:100%; outline:none;
+}
+.field-filled {
+  background:#fff;
+  box-shadow:0 1px 6px rgba(0,0,0,.07);
+}
+.field-label { font-size:12px; color:#8E8E93; margin-bottom:6px; }
+.tabs {
+  margin:10px 24px 0; background:#F2F2F7; border-radius:12px;
+  display:flex; padding:2px;
+}
+.tab {
+  flex:1; text-align:center; padding:7px 0; border-radius:10px;
+  font-size:15px; color:#8E8E93; cursor:pointer;
+}
+.tab.active {
+  background:#fff; color:#3A9FD5; font-weight:700;
+  box-shadow:0 1px 4px rgba(0,0,0,.06);
+}
+.group-hdr {
+  background:#fff; border-radius:12px;
+  box-shadow:0 1px 8px rgba(0,0,0,.06);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 16px; margin:12px 24px 0;
+}
+.tri {
+  width:0; height:0;
+  border-left:7px solid transparent;
+  border-right:7px solid transparent;
+  border-top:12px solid #3A9FD5;
+  margin-right:10px; flex-shrink:0;
+}
+.word-row {
+  background:#fff; border-radius:10px;
+  border:0.5px solid #C7C7CC;
+  padding:10px 16px;
+  display:flex; justify-content:space-between; align-items:center;
+  margin:6px 24px 0;
+}
+</style>
+</head>
+<body>
+<div class="screen">
+
+<div class="status"><span>9:41</span><span>● ● ●</span></div>
+<div class="page-title"><h1>新词</h1><p>记录一个新单词</p></div>
+<div style="padding:16px 24px 0">
+  <div class="field-label">单词</div>
+  <div class="field field-filled"
+    style="font-weight:700;font-size:17px;margin-bottom:14px">ephemeral</div>
+  <div class="field-label">词性 &amp; 词义</div>
+  <div style="display:flex;gap:10px;margin-bottom:10px">
+    <div class="field field-filled"
+      style="flex:0 0 118px;display:flex;align-items:center;
+             justify-content:space-between;color:#3A9FD5;font-weight:700">
+      <span>adj.</span><span style="font-size:11px">▾</span>
+    </div>
+    <div class="field field-filled" style="flex:1">短暂的；朝生暮死的</div>
+  </div>
+  <div style="display:inline-flex;align-items:center;gap:6px;background:#E8F4FC;
+    color:#3A9FD5;font-size:13px;border-radius:10px;
+    padding:7px 18px;margin-bottom:14px;cursor:pointer">
+    ＋ 添加词性
+  </div>
+  <div class="field-label">词组 &amp; 例句</div>
+  <div class="field field-filled" style="font-size:14px;line-height:1.7">
+    ephemeral fame — 昙花一现的名气<br>
+    Fame is ephemeral.
+  </div>
+  <button class="btn btn-blue"
+    style="width:100%;margin-top:18px;padding:16px 0">保存单词</button>
+</div>
+<div class="nav"><div class="nav-item">
+          <div class="icon-wrap"><span>↺</span></div>
+          <span>复习</span>
+        </div><div class="nav-item active">
+          <div class="icon-wrap"><span>＋</span></div>
+          <span>新词</span>
+        </div><div class="nav-item">
+          <div class="icon-wrap"><span>≡</span></div>
+          <span>词汇</span>
+        </div></div>
+</div>
+</body>
+</html>

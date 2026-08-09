@@ -1,4 +1,4 @@
-<view wx:if="{{word}}">
+<view>
   <view class="dropdown-mask" wx:if="{{openDropdownIndex !== -1}}" catchtap="onCloseDropdown"></view>
 
   <view class="card word-card">

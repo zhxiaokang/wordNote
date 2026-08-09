@@ -20,9 +20,18 @@ function buildHistory(word) {
   }));
 }
 
+function emptyWord() {
+  return { word: '', meanings: [], notes: '' };
+}
+
 Page({
   data: {
-    word: null,
+    // Never null: the whole page tree renders from the first frame using this
+    // stub, so onLoad's setData only has to patch text into already-mounted
+    // nodes instead of forcing the render layer to create the entire page's
+    // node tree right as the navigation transition lands (visible as a
+    // "frame appears instantly, content pops in late" stutter).
+    word: emptyWord(),
     createdDateSlash: '',
     history: [],
 

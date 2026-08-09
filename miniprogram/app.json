@@ -5,7 +5,8 @@
     "pages/vocab/index",
     "pages/mine/index",
     "pages/vocab-detail/index",
-    "pages/feedback/index"
+    "pages/feedback/index",
+    "pages/help/index"
   ],
   "window": {
     "backgroundColor": "#F2F6FB",

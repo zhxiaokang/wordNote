@@ -10,7 +10,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project status
 
-The app is implemented: 4 tabs (复习/新词/词汇/我的) plus a non-tab word-detail page and a feedback page, matching the mockups in `assets/1*`–`4*` and the spec in `design.md`. The original WeChat CloudBase quickstart demo (`pages/index`, `pages/example`, `components/cloudTipModal`, `envList.js`) has been deleted — it's fully superseded. `cloudfunctions/quickstartFunctions` (the demo's generic CRUD cloud function) was left in place, unused; only `cloudfunctions/wordApi` is wired to the app.
+The app is implemented: 4 tabs (复习/新词/词汇/我的) plus non-tab pages for word detail, feedback, and a static help page, matching the mockups in `assets/1*`–`4*` and the spec in `design.md`. The original WeChat CloudBase quickstart demo (`pages/index`, `pages/example`, `components/cloudTipModal`, `envList.js`) has been deleted — it's fully superseded. `cloudfunctions/quickstartFunctions` (the demo's generic CRUD cloud function) was left in place, unused; only `cloudfunctions/wordApi` is wired to the app.
 
 When extending the app: the word/review/vocab data model (below) is the load-bearing design — read it before changing scheduling or storage behavior, since several pieces depend on invariants that aren't obvious from any single file (e.g. `history` upsert-by-date, `dailyStatus` doing double duty as both session state and calendar log).
 
@@ -46,8 +46,9 @@ There is no account system and no cloud sync of word/dailyStatus data — that w
 
 - `miniprogram/custom-tab-bar/` — custom tab bar (`app.json` sets `tabBar.custom: true`) rendering glyphs (↺ ＋ ≡ 👤) instead of image icons, to match the mockups without needing new art assets. Each tab page calls `this.getTabBar().setActive(path)` in `onShow`.
 - `miniprogram/utils/` — `date.js` (pure date helpers), `review.js` (scheduling), `wordStore.js` (local CRUD + session + calendar + export/import), `cloudSync.js` (thin `wordApi` wrapper for feedback only). Pages call into these rather than touching `wx.getStorageSync`/`wx.cloud` directly.
-- `miniprogram/pages/vocab-detail/` and `miniprogram/pages/feedback/` are plain (non-tab) pages reached via `wx.navigateTo`, not part of the custom tab bar.
+- `miniprogram/pages/vocab-detail/`, `miniprogram/pages/feedback/`, and `miniprogram/pages/help/` are plain (non-tab) pages reached via `wx.navigateTo`, not part of the custom tab bar.
   - `vocab-detail`'s root deliberately does *not* gate on `wx:if="{{word}}"` — `data.word` defaults to an empty-but-truthy stub so the page's node tree is created once at mount and onLoad's `setData` only has to patch text into it. Wrapping the whole page in a single top-level `wx:if` (as it originally did) forces the render layer to create the entire subtree right as the `navigateTo` slide-in lands, which shows up as "nav bar appears instantly, content pops in late." Don't reintroduce a root-level `wx:if` here without re-checking that tradeoff.
+  - `help/index.wxml` is hand-authored static markup mirroring `assets/使用说明.md` (WeChat has no built-in markdown renderer, so there's no single source of truth parsed at runtime) — whenever one changes, update the other by hand.
 - `cloudfunctions/wordApi/` — the real backend for this app, now feedback-only (see Cloud usage above). `cloudfunctions/quickstartFunctions/` is inert leftover template code, not called from anywhere.
 - `project.config.json` / `project.private.config.json` — WeChat DevTools project config (appid, compile settings). `project.private.config.json` holds machine-local overrides.
 - `.notebook/` — scratch/tooling directory, not part of the shipped mini-program.

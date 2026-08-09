@@ -32,12 +32,20 @@
   </view>
 </view>
 
-<view class="card feedback-card" bindtap="onTapFeedback">
-  <view class="feedback-hdr">
+<view class="card nav-card" bindtap="onTapHelp">
+  <view class="nav-row-hdr">
+    <view class="card-title" style="margin-bottom:0">📖 使用说明</view>
+    <text class="chevron">›</text>
+  </view>
+  <view class="nav-row-sub">复习、新词、词汇、我的各功能的使用说明</view>
+</view>
+
+<view class="card nav-card" bindtap="onTapFeedback">
+  <view class="nav-row-hdr">
     <view class="card-title" style="margin-bottom:0">💬 用户反馈</view>
     <text class="chevron">›</text>
   </view>
-  <view class="feedback-sub">点击进入，提交建议或查看开发者回复</view>
+  <view class="nav-row-sub">点击进入，提交建议或查看开发者回复</view>
 </view>
 
 <view class="modal-mask" wx:if="{{showImportModal}}">

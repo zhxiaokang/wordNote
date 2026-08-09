@@ -50,6 +50,10 @@ Page({
     });
   },
 
+  onTapHelp() {
+    wx.navigateTo({ url: '/pages/help/index' });
+  },
+
   onTapFeedback() {
     wx.navigateTo({ url: '/pages/feedback/index' });
   },

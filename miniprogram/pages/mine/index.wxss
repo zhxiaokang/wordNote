@@ -78,12 +78,12 @@
   color: #8E8E93;
 }
 
-.feedback-hdr {
+.nav-row-hdr {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.feedback-sub {
+.nav-row-sub {
   font-size: 26rpx;
   color: #8E8E93;
   margin-top: 8rpx;

@@ -83,6 +83,17 @@ function addWord({ word, meanings, notes }) {
   return w;
 }
 
+function updateWord({ id, word, meanings, notes }) {
+  const existing = getWordById(id);
+  if (!existing) return null;
+  existing.word = word.trim();
+  existing.meanings = meanings.map((m) => ({ pos: m.pos, def: m.def }));
+  existing.notes = notes || '';
+  existing.updatedAt = Date.now();
+  saveWord(existing);
+  return existing;
+}
+
 function getDueWords(dateStr) {
   return readWords()
     .filter((w) => w.nextReviewDate <= dateStr)
@@ -273,6 +284,7 @@ module.exports = {
   getWordById,
   saveWord,
   addWord,
+  updateWord,
   getDueWords,
   backfillGapDays,
   getOrCreateTodaySession,

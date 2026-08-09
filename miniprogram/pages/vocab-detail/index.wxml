@@ -1,23 +1,85 @@
 <view wx:if="{{word}}">
+  <view class="dropdown-mask" wx:if="{{openDropdownIndex !== -1}}" catchtap="onCloseDropdown"></view>
+
   <view class="card word-card">
-    <view class="word-text">{{word.word}}</view>
+    <block wx:if="{{!editing}}">
+      <view class="word-text">{{word.word}}</view>
+    </block>
+    <block wx:else>
+      <input
+        class="word-input-edit"
+        placeholder="{{wordFocused ? '' : '单词'}}"
+        value="{{editWord}}"
+        bindinput="onWordInput"
+        bindfocus="onWordFocus"
+        bindblur="onWordBlur"
+      />
+    </block>
     <view class="added-badge">添加于 {{createdDateSlash}}</view>
+  </view>
+
+  <view class="edit-toolbar">
+    <view wx:if="{{!editing}}" class="btn-pill btn-pill--blue" bindtap="onEdit">✎ 编辑</view>
+    <block wx:else>
+      <view class="btn-pill btn-pill--gray" bindtap="onCancelEdit">取消</view>
+      <view class="btn-pill {{canSave ? 'btn-pill--blue' : 'btn-pill--disabled'}}" bindtap="onSave">保存</view>
+    </block>
   </view>
 
   <view class="section">
     <view class="section-title">词义</view>
-    <view class="card meaning-card">
-      <view class="meaning-row" wx:for="{{word.meanings}}" wx:key="pos">
+    <view class="card meaning-card" wx:if="{{!editing}}">
+      <view class="meaning-row-view" wx:for="{{word.meanings}}" wx:key="pos">
         <text class="pos">{{item.pos}}</text>
         <text class="def">{{item.def}}</text>
       </view>
     </view>
+    <view wx:else>
+      <view class="meaning-row" wx:for="{{editMeaningRows}}" wx:key="index" wx:for-index="index">
+        <view class="pos-select field field-filled" data-index="{{index}}" bindtap="onToggleDropdown">
+          <text class="{{item.pos ? 'pos-value' : 'pos-placeholder'}}">{{item.pos || '选择词性...'}}</text>
+          <text class="caret">▾</text>
+        </view>
+        <input
+          class="field def-input {{item.pos ? 'field-filled' : ''}}"
+          placeholder="{{focusedDefIndex === index ? '' : '填写该词性的词义'}}"
+          value="{{item.def}}"
+          data-index="{{index}}"
+          bindinput="onDefInput"
+          bindfocus="onDefFocus"
+          bindblur="onDefBlur"
+        />
+        <view class="remove-meaning" wx:if="{{editMeaningRows.length > 1}}" data-index="{{index}}" bindtap="onRemoveMeaning">×</view>
+        <view class="dropdown" wx:if="{{openDropdownIndex === index}}">
+          <view
+            class="dropdown-option {{item.pos === opt ? 'dropdown-option--active' : ''}}"
+            wx:for="{{posOptions}}"
+            wx:for-item="opt"
+            wx:for-index="optIndex"
+            wx:key="*this"
+            data-index="{{index}}"
+            data-pos="{{opt}}"
+            bindtap="onSelectPos"
+          >{{opt}}</view>
+        </view>
+      </view>
+      <view class="add-pos" bindtap="onAddMeaning">＋ 添加词性</view>
+    </view>
 
-    <view class="section-title">词组 &amp; 例句</view>
-    <view class="card notes-card">
+    <view class="section-title">词组 & 例句</view>
+    <view class="card notes-card" wx:if="{{!editing}}">
       <text wx:if="{{word.notes}}">{{word.notes}}</text>
       <text wx:else class="notes-empty">未记录</text>
     </view>
+    <textarea
+      wx:else
+      class="field notes-input {{editNotes ? 'field-filled' : ''}}"
+      placeholder="{{notesFocused ? '' : '记录词组或例句（选填）'}}"
+      value="{{editNotes}}"
+      bindinput="onNotesInput"
+      bindfocus="onNotesFocus"
+      bindblur="onNotesBlur"
+    />
 
     <view class="section-title">复习记录</view>
     <view class="card history-card">

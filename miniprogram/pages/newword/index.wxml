@@ -3,6 +3,8 @@
   <text class="subtitle">记录一个新单词</text>
 </view>
 
+<view class="dropdown-mask" wx:if="{{openDropdownIndex !== -1}}" catchtap="onCloseDropdown"></view>
+
 <view class="form">
   <text class="field-label">单词</text>
   <input
@@ -34,6 +36,7 @@
         class="dropdown-option {{item.pos === opt ? 'dropdown-option--active' : ''}}"
         wx:for="{{posOptions}}"
         wx:for-item="opt"
+        wx:for-index="optIndex"
         wx:key="*this"
         data-index="{{index}}"
         data-pos="{{opt}}"

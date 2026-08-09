@@ -79,8 +79,12 @@ Page({
   onSelectPos(e) {
     const { index, pos } = e.currentTarget.dataset;
     const meaningRows = this.data.meaningRows;
-    meaningRows[index].pos = pos;
+    meaningRows[index].pos = meaningRows[index].pos === pos ? '' : pos;
     this.setData({ meaningRows, openDropdownIndex: -1 }, () => this.updateCanSave());
+  },
+
+  onCloseDropdown() {
+    this.setData({ openDropdownIndex: -1 });
   },
 
   onAddMeaning() {

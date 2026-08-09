@@ -2,22 +2,13 @@
   <text class="title">我的</text>
 </view>
 
-<view class="card profile-card">
-  <block wx:if="{{auth.loggedIn}}">
-    <image wx:if="{{auth.avatarUrl}}" class="avatar" src="{{auth.avatarUrl}}" />
-    <view wx:else class="avatar avatar-placeholder">😊</view>
-    <view>
-      <view class="nickname">{{auth.nickName || '微信用户'}}</view>
-      <view class="login-sub">已登录 · 数据已同步</view>
-    </view>
-  </block>
-  <block wx:else>
-    <view class="avatar avatar-placeholder">👤</view>
-    <view class="login-body">
-      <view class="login-sub">登录后可同步数据到云端</view>
-      <button class="btn btn-blue login-btn" bindtap="onTapLogin">登录</button>
-    </view>
-  </block>
+<view class="card backup-card">
+  <view class="card-title">💾 数据备份</view>
+  <view class="backup-sub">单词和复习记录只保存在本机，换机或清理微信缓存前建议导出备份</view>
+  <view class="backup-actions">
+    <button class="btn btn-ghost backup-btn" bindtap="onTapExport">导出数据</button>
+    <button class="btn btn-blue backup-btn" bindtap="onTapImport">导入数据</button>
+  </view>
 </view>
 
 <view class="card checkin-card">
@@ -44,18 +35,19 @@
 <view class="card feedback-card" bindtap="onTapFeedback">
   <view class="feedback-hdr">
     <view class="card-title" style="margin-bottom:0">💬 用户反馈</view>
-    <text wx:if="{{auth.loggedIn}}" class="chevron">›</text>
+    <text class="chevron">›</text>
   </view>
-  <view class="feedback-sub">{{auth.loggedIn ? '点击进入，提交建议或查看开发者回复' : '登录后可提交反馈'}}</view>
+  <view class="feedback-sub">点击进入，提交建议或查看开发者回复</view>
 </view>
 
-<view class="modal-mask" wx:if="{{showLoginModal}}">
+<view class="modal-mask" wx:if="{{showImportModal}}">
   <view class="modal-box">
-    <view class="modal-title">授权登录</view>
-    <view class="modal-desc">「记单词」申请获取你的微信昵称和头像，用于账号登录与数据同步。</view>
+    <view class="modal-title">导入数据</view>
+    <view class="modal-desc">粘贴此前导出的备份内容，将与本机数据合并（同一单词/日期以更新时间较新的为准）。</view>
+    <textarea class="import-textarea" placeholder="粘贴导出的内容…" value="{{importDraft}}" bindinput="onImportDraftInput" />
     <view class="modal-actions">
-      <button class="btn btn-ghost" bindtap="onCancelLogin">取消</button>
-      <button class="btn btn-blue" bindtap="onConfirmLogin">允许</button>
+      <button class="btn btn-ghost" bindtap="onCancelImport">取消</button>
+      <button class="btn btn-blue" bindtap="onConfirmImport">导入</button>
     </view>
   </view>
 </view>

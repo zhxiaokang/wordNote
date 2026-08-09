@@ -1,13 +1,12 @@
 const wordStore = require('../../utils/wordStore.js');
-const cloudSync = require('../../utils/cloudSync.js');
 const dateUtil = require('../../utils/date.js');
 
 const WEEKDAY_LABELS = ['一', '二', '三', '四', '五', '六', '日'];
 
 Page({
   data: {
-    auth: { loggedIn: false },
-    showLoginModal: false,
+    showImportModal: false,
+    importDraft: '',
     monthLabel: '',
     weekdayLabels: WEEKDAY_LABELS,
     weeks: [],
@@ -18,7 +17,6 @@ Page({
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setActive('/pages/mine/index');
     }
-    this.setData({ auth: cloudSync.getAuth() });
     this.loadCalendar();
   },
 
@@ -52,30 +50,42 @@ Page({
     });
   },
 
-  onTapLogin() {
-    this.setData({ showLoginModal: true });
-  },
-
-  onCancelLogin() {
-    this.setData({ showLoginModal: false });
-  },
-
-  onConfirmLogin() {
-    cloudSync
-      .login()
-      .then((auth) => {
-        this.setData({ showLoginModal: false, auth });
-        this.loadCalendar();
-        wx.showToast({ title: '登录成功', icon: 'success' });
-      })
-      .catch(() => {
-        this.setData({ showLoginModal: false });
-        wx.showToast({ title: '登录失败，请重试', icon: 'none' });
-      });
-  },
-
   onTapFeedback() {
-    if (!this.data.auth.loggedIn) return;
     wx.navigateTo({ url: '/pages/feedback/index' });
+  },
+
+  onTapExport() {
+    const json = wordStore.exportData();
+    wx.setClipboardData({
+      data: json,
+      success: () => wx.showToast({ title: '已复制到剪贴板，请粘贴保存', icon: 'none' }),
+      fail: () => wx.showToast({ title: '导出失败，请重试', icon: 'none' }),
+    });
+  },
+
+  onTapImport() {
+    this.setData({ showImportModal: true, importDraft: '' });
+  },
+
+  onCancelImport() {
+    this.setData({ showImportModal: false });
+  },
+
+  onImportDraftInput(e) {
+    this.setData({ importDraft: e.detail.value });
+  },
+
+  onConfirmImport() {
+    const draft = this.data.importDraft.trim();
+    if (!draft) return;
+    try {
+      wordStore.importData(draft);
+    } catch (e) {
+      wx.showToast({ title: '导入失败，请检查内容', icon: 'none' });
+      return;
+    }
+    this.setData({ showImportModal: false });
+    this.loadCalendar();
+    wx.showToast({ title: '导入成功', icon: 'success' });
   },
 });

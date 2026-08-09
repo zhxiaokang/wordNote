@@ -1,26 +1,14 @@
 // wordStore.js — local-first data layer for words + daily review status.
-// All persistence goes through wx.setStorageSync/getStorageSync. Cloud sync (utils/cloudSync.js)
-// hooks in via setChangeListener() so this module stays decoupled from network/login concerns.
+// All persistence goes through wx.setStorageSync/getStorageSync — this is the sole source of
+// truth, there is no cloud sync of word data. exportData/importData exist as a manual backup
+// mechanism (see mine page) since data doesn't otherwise survive uninstalling WeChat, clearing
+// its cache, or a device migration that skips app data.
 const { today, addDays, getWeekRange, getMonthKey, getMonthLabel, getYearKey, getYearLabel } = require('./date.js');
 const { advanceSchedule, REVIEW_INTERVALS } = require('./review.js');
 
 const WORDS_KEY = 'words';
 const DAILY_STATUS_KEY = 'dailyStatus';
 const LAST_OPEN_DATE_KEY = 'lastOpenDate';
-
-let changeListener = null;
-function setChangeListener(fn) {
-  changeListener = fn;
-}
-function notifyChange(kind, payload) {
-  if (changeListener) {
-    try {
-      changeListener(kind, payload);
-    } catch (e) {
-      // sync listener failures must never break local data flow
-    }
-  }
-}
 
 function generateId() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
@@ -55,7 +43,6 @@ function saveWord(word) {
   if (idx >= 0) words[idx] = word;
   else words.push(word);
   writeWords(words);
-  notifyChange('word', word);
 }
 
 function upsertHistory(word, action) {
@@ -141,7 +128,6 @@ function getOrCreateTodaySession() {
     };
     map[t] = entry;
     writeDailyStatus(map);
-    notifyChange('dailyStatus', entry);
   }
   return entry;
 }
@@ -151,7 +137,6 @@ function saveSession(entry) {
   const map = readDailyStatus();
   map[entry.date] = entry;
   writeDailyStatus(map);
-  notifyChange('dailyStatus', entry);
 }
 
 function getCurrentSessionWord(session) {
@@ -254,31 +239,39 @@ function getDailyStatusList() {
   return Object.keys(map).map((k) => map[k]);
 }
 
-// Merge word/dailyStatus docs pulled from the cloud into local storage, last-write-wins by
-// updatedAt. Used on login (full pull) and on each app-launch incremental sync.
-function mergeRemote({ words, dailyStatus }) {
+// Manual backup: a JSON snapshot of everything local, for the user to copy out via the 我的
+// page (e.g. before uninstalling WeChat or switching devices) and paste back in later.
+function exportData() {
+  return JSON.stringify({ words: readWords(), dailyStatus: getDailyStatusList() });
+}
+
+// Imports a snapshot produced by exportData(). Merges rather than overwrites, last-write-wins
+// by updatedAt, so re-importing an old backup can't clobber newer local data.
+function importData(json) {
+  const data = JSON.parse(json);
+  const words = data.words;
+  const dailyStatus = data.dailyStatus;
   if (words && words.length) {
     const local = readWords();
     const byId = {};
     local.forEach((w) => (byId[w.id] = w));
-    words.forEach((remote) => {
-      const existing = byId[remote.id];
-      if (!existing || remote.updatedAt > existing.updatedAt) byId[remote.id] = remote;
+    words.forEach((incoming) => {
+      const existing = byId[incoming.id];
+      if (!existing || incoming.updatedAt > existing.updatedAt) byId[incoming.id] = incoming;
     });
     writeWords(Object.keys(byId).map((id) => byId[id]));
   }
   if (dailyStatus && dailyStatus.length) {
     const map = readDailyStatus();
-    dailyStatus.forEach((remote) => {
-      const existing = map[remote.date];
-      if (!existing || remote.updatedAt > existing.updatedAt) map[remote.date] = remote;
+    dailyStatus.forEach((incoming) => {
+      const existing = map[incoming.date];
+      if (!existing || incoming.updatedAt > existing.updatedAt) map[incoming.date] = incoming;
     });
     writeDailyStatus(map);
   }
 }
 
 module.exports = {
-  setChangeListener,
   generateId,
   getWords,
   getWordById,
@@ -296,5 +289,6 @@ module.exports = {
   computeCalendarStatus,
   getGroupedVocab,
   getDailyStatusList,
-  mergeRemote,
+  exportData,
+  importData,
 };

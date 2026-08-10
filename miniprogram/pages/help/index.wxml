@@ -113,6 +113,6 @@
 
   <view class="sub-title">用户反馈</view>
   <view class="card help-card">
-    <view class="help-p help-p--last">有意见或问题可以在这里留言，会发送给开发者；开发者的回复也会显示在这里。提交反馈不需要登录账号。</view>
+    <view class="help-p help-p--last">点击进入后会展示开发者的反馈邮箱，可以点“复制邮箱”把地址复制下来，然后用自己的邮箱 App 发邮件反馈问题或建议。</view>
   </view>
 </view>

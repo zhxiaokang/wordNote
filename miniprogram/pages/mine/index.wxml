@@ -45,7 +45,7 @@
     <view class="card-title" style="margin-bottom:0">💬 用户反馈</view>
     <text class="chevron">›</text>
   </view>
-  <view class="nav-row-sub">点击进入，提交建议或查看开发者回复</view>
+  <view class="nav-row-sub">点击查看反馈邮箱</view>
 </view>
 
 <view class="modal-mask" wx:if="{{showImportModal}}">

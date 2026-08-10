@@ -99,7 +99,7 @@
   background: #F0FFF4;
   color: #34C759;
 }
-.badge--dontknow, .badge--wrong {
+.badge--dontknow {
   background: #FFF0F0;
   color: #FF3B30;
 }

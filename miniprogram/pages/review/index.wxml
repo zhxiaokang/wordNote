@@ -40,7 +40,7 @@
         <text class="notes-text">{{currentWord.notes}}</text>
       </view>
       <view class="badge badge--{{badgeType}}">
-        刚才选了：{{badgeType === 'know' ? '记得' : (badgeType === 'wrong' ? '记错了' : '不记得')}}
+        刚才选了：{{badgeType === 'know' ? '记得' : '不记得'}}
       </view>
     </view>
     <view wx:if="{{phase === 'feedback' && showNext}}" class="btn-row">

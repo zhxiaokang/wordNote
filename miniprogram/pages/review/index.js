@@ -68,7 +68,8 @@ Page({
   },
 
   onTapWrong() {
-    this.setData({ badgeType: 'wrong', showNext: true });
+    this.session = wordStore.resolveIncorrect(this.session, this.data.currentWord.id);
+    this.refreshView();
   },
 
   onTapCorrect() {

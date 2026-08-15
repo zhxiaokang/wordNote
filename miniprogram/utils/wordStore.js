@@ -215,16 +215,16 @@ function computeCalendarStatus(dateStr) {
     const session = entry && entry.order ? entry : getOrCreateTodaySession();
     if (!session.finished) return { pending: true };
     if (session.dueCount === 0) return null;
-    return session.doneCount >= session.dueCount ? { emoji: '😊' } : { emoji: '😐' };
+    return session.doneCount >= session.dueCount ? { emoji: '🥳' } : { emoji: '😐' };
   }
   if (!entry) {
     const dueCount = readWords().filter((w) => w.nextReviewDate <= dateStr).length;
-    return dueCount === 0 ? null : { emoji: '😢' };
+    return dueCount === 0 ? null : { emoji: '😭' };
   }
   if (entry.dueCount === 0) return null;
-  if (entry.doneCount === 0) return { emoji: '😢' };
+  if (entry.doneCount === 0) return { emoji: '😭' };
   if (entry.doneCount < entry.dueCount) return { emoji: '😐' };
-  return { emoji: '😊' };
+  return { emoji: '🥳' };
 }
 
 // Vocabulary tab grouping. mode: 'week' | 'month' | 'year'.

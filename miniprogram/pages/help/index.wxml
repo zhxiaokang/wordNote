@@ -77,7 +77,7 @@
     <view class="help-p">一个月历视图，每天用一个表情总结当天的复习情况：</view>
     <view class="help-item">
       <text class="help-bullet">•</text>
-      <text class="help-text">😊 当天任务全部完成</text>
+      <text class="help-text">🥳 当天任务全部完成</text>
     </view>
     <view class="help-item">
       <text class="help-bullet">•</text>
@@ -85,7 +85,7 @@
     </view>
     <view class="help-item">
       <text class="help-bullet">•</text>
-      <text class="help-text">😢 当天有复习任务，但完全没打开/没复习</text>
+      <text class="help-text">😭 当天有复习任务，但完全没打开/没复习</text>
     </view>
     <view class="help-item">
       <text class="help-bullet">•</text>

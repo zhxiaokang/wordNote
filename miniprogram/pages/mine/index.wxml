@@ -17,9 +17,9 @@
     </view>
   </view>
   <view class="legend">
-    <text>😊 全部完成</text>
+    <text>🥳 全部完成</text>
     <text>😐 部分完成</text>
-    <text>😢 未复习</text>
+    <text>😭 未复习</text>
   </view>
 </view>
 
